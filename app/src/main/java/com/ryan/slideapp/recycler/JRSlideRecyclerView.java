@@ -40,6 +40,10 @@ public class JRSlideRecyclerView extends RecyclerView {
      */
     private boolean isFirst = true;
     private Context mContext;
+    private int lastX = 0;
+    private int lastY = 0;
+    private boolean isFirstMove = true;
+    private boolean isOnSuper = true;
 
 
 
@@ -71,6 +75,8 @@ public class JRSlideRecyclerView extends RecyclerView {
                 //记录当前按下的坐标
                 xDown = x;
                 yDown = y;
+                lastX = xDown;
+                lastY = yDown;
                 //计算选中哪个Item
                 int firstPosition = ((LinearLayoutManager)getLayoutManager()).findFirstVisibleItemPosition();
                 Rect itemRect = new Rect();
@@ -116,26 +122,53 @@ public class JRSlideRecyclerView extends RecyclerView {
             case MotionEvent.ACTION_MOVE:
                 xMove = x;
                 yMove = y;
-                int dx = xMove - xDown;//为负时：手指向左滑动；为正时：手指向右滑动。这与Android的屏幕坐标定义有关
-                int dy = yMove - yDown;//
-
-                //左滑
-                if (dx < 0 && Math.abs(dx) > mTouchSlop && Math.abs(dy) < mTouchSlop){
-                    int newScrollX = Math.abs(dx);
-                    if (mMoveWidth >= mHiddenWidth){//超过了，不能再移动了
-                        newScrollX = 0;
-                    } else if (mMoveWidth + newScrollX > mHiddenWidth){//这次要超了，
-                        newScrollX = mHiddenWidth - mMoveWidth;
+                int dx = xMove - lastX;//为负时：手指向左滑动；为正时：手指向右滑动。这与Android的屏幕坐标定义有关
+                int dy = yMove - lastY;//
+                if (isFirstMove){
+                    if (dx < 0 && Math.abs(dx) > mTouchSlop){
+                        int newScrollX = Math.abs(dx);
+                        if (mMoveWidth >= mHiddenWidth){//超过了，不能再移动了
+                            newScrollX = 0;
+                        } else if (mMoveWidth + newScrollX > mHiddenWidth){//这次要超了，
+                            newScrollX = mHiddenWidth - mMoveWidth;
+                        }
+                        //左滑，每次滑动手指移动的距离
+                        scrollLeft(mCurItemLayout, newScrollX);
+                        //对移动的距离叠加
+                        mMoveWidth = mMoveWidth + newScrollX;
+                    }else if (dx > 0){//右滑
+                        int newScrollX = Math.abs(dx);
+                        if (mMoveWidth - newScrollX < 0){
+                            newScrollX = mMoveWidth;
+                        }
+                        scrollRight(mCurItemLayout, 0 - newScrollX);
+                        mMoveWidth = mMoveWidth - newScrollX;
                     }
-                    //左滑，每次滑动手指移动的距离
-                    scrollLeft(mCurItemLayout, newScrollX);
-                    //对移动的距离叠加
-                    mMoveWidth = mMoveWidth + newScrollX;
-                }else if (dx > 0){//右滑
-                    //执行右滑，这里没有做跟随，瞬间恢复
-                    scrollRight(mCurItemLayout, 0 - mMoveWidth);
-                    mMoveWidth = 0;
+
+                    isFirstMove = false;
+                }else {
+                    if (dx < 0 ){
+                        int newScrollX = Math.abs(dx);
+                        if (mMoveWidth >= mHiddenWidth){//超过了，不能再移动了
+                            newScrollX = 0;
+                        } else if (mMoveWidth + newScrollX > mHiddenWidth){//这次要超了，
+                            newScrollX = mHiddenWidth - mMoveWidth;
+                        }
+                        //左滑，每次滑动手指移动的距离
+                        scrollLeft(mCurItemLayout, newScrollX);
+                        //对移动的距离叠加
+                        mMoveWidth = mMoveWidth + newScrollX;
+                    }else if (dx > 0){//右滑
+                        int newScrollX = Math.abs(dx);
+                        if (mMoveWidth - newScrollX < 0){
+                            newScrollX = mMoveWidth;
+                        }
+                        scrollRight(mCurItemLayout, 0 - newScrollX);
+                        mMoveWidth = mMoveWidth - newScrollX;
+                    }
+
                 }
+                //左滑
 
                 break;
             case MotionEvent.ACTION_UP://手抬起时
@@ -156,6 +189,8 @@ public class JRSlideRecyclerView extends RecyclerView {
 
 
         }
+        lastX = x;
+        lastY = y;
         return super.onTouchEvent(e);
     }
 

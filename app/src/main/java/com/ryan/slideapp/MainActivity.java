@@ -31,6 +31,11 @@ public class MainActivity extends AppCompatActivity {
         list.add("第二个");
         list.add("第三个");
         list.add("第四个");
+        list.add("第四个");
+        list.add("第四个");
+        list.add("第四个");
+        list.add("第四个");
+        list.add("第四个");
         ShareAdapter adapter = new ShareAdapter(this,list);
         adapter.addSlideItem(new SlideItem("测试", 0, 0, new View.OnClickListener() {
             @Override
