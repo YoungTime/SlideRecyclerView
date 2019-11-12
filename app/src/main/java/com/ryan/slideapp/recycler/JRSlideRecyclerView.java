@@ -83,6 +83,8 @@ public class JRSlideRecyclerView extends RecyclerView {
                         if (itemRect.contains(x, y)){
                             curSelectPosition = firstPosition + i;
                             break;
+                        }else {
+                            curSelectPosition = -1;
                         }
                     }
                 }
