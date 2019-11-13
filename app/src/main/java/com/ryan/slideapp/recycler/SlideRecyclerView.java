@@ -28,7 +28,7 @@ public class SlideRecyclerView extends RecyclerView {
     private static final int MIN_SPEED = 500; // 最小速度
 
 
-    private VelocityTracker mVelocity;
+    private VelocityTracker tracker; // 滑动速度追踪器
 
     /**触碰末次的横坐标*/
     private int mLastX;
@@ -59,7 +59,7 @@ public class SlideRecyclerView extends RecyclerView {
     public boolean onInterceptTouchEvent(MotionEvent e) {
         int x = (int) e.getX();
         int y = (int) e.getY();
-        addVelocityEvent(e);
+        addTracker(e);
         switch (e.getAction()){
             case MotionEvent.ACTION_DOWN:
                 //若Scroller处于动画中，则终止动画
@@ -82,9 +82,9 @@ public class SlideRecyclerView extends RecyclerView {
                 }
                 break;
             case MotionEvent.ACTION_MOVE:
-                mVelocity.computeCurrentVelocity(1000);
-                int velocityX = (int) Math.abs(mVelocity.getXVelocity());
-                int velocityY = (int) Math.abs(mVelocity.getYVelocity());
+                tracker.computeCurrentVelocity(1000);
+                int velocityX = (int) Math.abs(tracker.getXVelocity());
+                int velocityY = (int) Math.abs(tracker.getYVelocity());
                 int moveX = Math.abs(x - xDown);
                 int moveY = Math.abs(y - yDown);
                 //满足如下条件其一则判定为水平滑动：
@@ -101,7 +101,7 @@ public class SlideRecyclerView extends RecyclerView {
                 break;
             case MotionEvent.ACTION_UP:
             case MotionEvent.ACTION_CANCEL:
-                releaseVelocity();
+                removeTracker();
                 //itemView以及其子view触发触碰事件(点击、长按等)，菜单未关闭则直接关闭
                 closeMenuNow();
                 break;
@@ -114,7 +114,7 @@ public class SlideRecyclerView extends RecyclerView {
     public boolean onTouchEvent(MotionEvent e) {
         int x = (int) e.getX();
         int y = (int) e.getY();
-        addVelocityEvent(e);
+        addTracker(e);
         switch (e.getAction()){
             case MotionEvent.ACTION_DOWN:
                 break;
@@ -129,9 +129,9 @@ public class SlideRecyclerView extends RecyclerView {
                     mLastX = x;
                     return true;
                 }else {
-                    mVelocity.computeCurrentVelocity(1000);
-                    int velocityX = (int) Math.abs(mVelocity.getXVelocity());
-                    int velocityY = (int) Math.abs(mVelocity.getYVelocity());
+                    tracker.computeCurrentVelocity(1000);
+                    int velocityX = (int) Math.abs(tracker.getXVelocity());
+                    int velocityY = (int) Math.abs(tracker.getYVelocity());
                     int moveX = Math.abs(x - xDown);
                     int moveY = Math.abs(y - yDown);
                     //根据水平滑动条件判断，是否让itemView跟随手指滑动
@@ -162,13 +162,13 @@ public class SlideRecyclerView extends RecyclerView {
                     isMoving = false;
                     //已放手，即现滑动的itemView成了末次滑动的itemView
                     lastItem = curItem;
-                    mVelocity.computeCurrentVelocity(1000);
+                    tracker.computeCurrentVelocity(1000);
                     int scrollX = lastItem.getScrollX();
                     //若速度大于正方向最小速度，则关闭菜单栏；若速度小于反方向最小速度，则打开菜单栏
                     //若速度没到判断条件，则对菜单显示的宽度进行判断打开/关闭菜单
-                    if (mVelocity.getXVelocity() >= MIN_SPEED){
+                    if (tracker.getXVelocity() >= MIN_SPEED){
                         mScroller.startScroll(scrollX, 0, -scrollX, 0, Math.abs(scrollX));
-                    }else if (mVelocity.getXVelocity() <= -MIN_SPEED){
+                    }else if (tracker.getXVelocity() <= -MIN_SPEED){
                         int dx = hideWidth - scrollX;
                         mScroller.startScroll(scrollX, 0, dx, 0, Math.abs(dx));
                     } else if (scrollX > hideWidth / 2) {
@@ -182,7 +182,7 @@ public class SlideRecyclerView extends RecyclerView {
                     //若不是水平滑动状态，菜单栏开着则关闭
                     closeMenu();
                 }
-                releaseVelocity();
+                removeTracker();
                 break;
             default:break;
         }
@@ -225,21 +225,21 @@ public class SlideRecyclerView extends RecyclerView {
      * 获取VelocityTracker实例，并为其添加事件
      * @param e 触碰事件
      */
-    private void addVelocityEvent(MotionEvent e){
-        if (mVelocity == null){
-            mVelocity = VelocityTracker.obtain();
+    private void addTracker(MotionEvent e){
+        if (tracker == null){
+            tracker = VelocityTracker.obtain();
         }
-        mVelocity.addMovement(e);
+        tracker.addMovement(e);
     }
 
     /**
      * 释放VelocityTracker
      */
-    private void releaseVelocity(){
-        if (mVelocity != null){
-            mVelocity.clear();
-            mVelocity.recycle();
-            mVelocity = null;
+    private void removeTracker(){
+        if (tracker != null){
+            tracker.clear();
+            tracker.recycle();
+            tracker = null;
         }
     }
 
