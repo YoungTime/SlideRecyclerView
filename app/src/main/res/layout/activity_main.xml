@@ -6,10 +6,11 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <com.ryan.slideapp.recycler.JRSlideRecyclerView
+    <com.ryan.slideapp.recycler.SlideRecyclerView
+        app:layout_constraintTop_toTopOf="parent"
         android:id="@+id/jsr_list"
         android:layout_width="match_parent"
-        android:layout_height="300dp"/>
+        android:layout_height="match_parent"/>
 
 
 </android.support.constraint.ConstraintLayout>

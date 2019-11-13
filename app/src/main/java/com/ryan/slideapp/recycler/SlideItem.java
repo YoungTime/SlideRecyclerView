@@ -1,35 +1,52 @@
 package com.ryan.slideapp.recycler;
 
-import android.view.View;
 
 public class SlideItem {
 
     private String title;
     private int iconId;
-    private int bgColorId;
-    private View.OnClickListener listener;
+    private int bgId;
+    private SlideItemAdapter.OnItemClickListener listener;
+    private int titleColorId;
+    private float titleSize;
 
-    public SlideItem(String title, int iconId, int bgColorId, View.OnClickListener listener){
+    public SlideItem(String title, int iconId, SlideItemAdapter.OnItemClickListener listener){
         this.title = title;
         this.iconId = iconId;
-        this.bgColorId = bgColorId;
+        this.listener = listener;
+    }
+
+    public SlideItem(String title, int iconId, int bgId,int titleColorId,float titleSize, SlideItemAdapter.OnItemClickListener listener){
+        this.title = title;
+        this.iconId = iconId;
+        this.bgId = bgId;
+        this.titleColorId = titleColorId;
+        this.titleSize = titleSize;
         this.listener = listener;
     }
 
 
-    public String getTitle() {
+    String getTitle() {
         return title;
     }
 
-    public int getIconId() {
+    int getIconId() {
         return iconId;
     }
 
-    public int getBgColorId() {
-        return bgColorId;
+    int getBgId() {
+        return bgId;
     }
 
-    public View.OnClickListener getListener() {
+    SlideItemAdapter.OnItemClickListener getListener() {
         return listener;
+    }
+
+    int getTitleColorId() {
+        return titleColorId;
+    }
+
+    float getTitleSize() {
+        return titleSize;
     }
 }

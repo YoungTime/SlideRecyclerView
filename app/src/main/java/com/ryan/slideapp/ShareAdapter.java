@@ -5,12 +5,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import com.ryan.slideapp.recycler.JRSlideViewAdapter;
+import com.ryan.slideapp.recycler.SlideViewAdapter;
 
 import java.util.List;
 
-public class ShareAdapter extends JRSlideViewAdapter {
+public class ShareAdapter extends SlideViewAdapter {
 
     private Context context;
     private List<Object> strings;
@@ -26,11 +27,17 @@ public class ShareAdapter extends JRSlideViewAdapter {
     }
 
     @Override
-    protected void bindContent(LinearLayout linearLayout, Object data) {
+    protected void bindContent(LinearLayout linearLayout, final Object data) {
         View view = LayoutInflater.from(linearLayout.getContext()).inflate(R.layout.item_slide_view,linearLayout,false);
         linearLayout.addView(view);
         TextView tv = view.findViewById(R.id.tv_slide);
         tv.setText((String) data);
+        view .setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(context, (String) data,Toast.LENGTH_SHORT).show();
+            }
+        });
 
     }
 

@@ -3,12 +3,12 @@ package com.ryan.slideapp;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Toast;
 
-import com.ryan.slideapp.recycler.JRSlideRecyclerView;
+import com.ryan.slideapp.recycler.SlideItemAdapter;
 import com.ryan.slideapp.recycler.SlideItem;
+import com.ryan.slideapp.recycler.SlideRecyclerView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +16,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
 
-    private JRSlideRecyclerView recyclerView;
+    private SlideRecyclerView recyclerView;
 
 
     @Override
@@ -37,10 +37,15 @@ public class MainActivity extends AppCompatActivity {
         list.add("第四个");
         list.add("第四个");
         ShareAdapter adapter = new ShareAdapter(this,list);
-        adapter.addSlideItem(new SlideItem("测试", 0, 0, new View.OnClickListener() {
+        adapter.addSlideItem(new SlideItem("测试", 0, new SlideItemAdapter.OnItemClickListener() {
             @Override
-            public void onClick(View v) {
-                Toast.makeText(MainActivity.this,"点击按钮",Toast.LENGTH_SHORT).show();
+            public void onClick(View view, int pos) {
+                Toast.makeText(MainActivity.this,"第"+pos+" 点击按钮",Toast.LENGTH_SHORT).show();
+            }
+        })).addSlideItem(new SlideItem("测试",  0,R.color.colorPrimaryDark,0,0, new SlideItemAdapter.OnItemClickListener() {
+            @Override
+            public void onClick(View view, int pos) {
+                Toast.makeText(MainActivity.this,"第"+pos+" 点击按钮",Toast.LENGTH_SHORT).show();
             }
         }));
         recyclerView.setAdapter(adapter);

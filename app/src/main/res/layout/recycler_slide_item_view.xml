@@ -1,15 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="80dp"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="60dp"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:background="@color/colorAccent">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/iv_slide_item_icon"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        app:layout_constraintTop_toTopOf="parent"
+        android:src="@mipmap/ic_launcher"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_margin="4dp"/>
 
     <TextView
-        android:id="@+id/tv_slide_item_text"
-        android:layout_width="wrap_content"
+        android:id="@+id/tv_slide_item_title"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/iv_slide_item_icon"
+        android:layout_margin="4dp"
         android:gravity="center"
-        android:textSize="20sp"/>
+        app:layout_constraintBottom_toBottomOf="parent"
+        />
 
-</LinearLayout>
+</android.support.constraint.ConstraintLayout>
