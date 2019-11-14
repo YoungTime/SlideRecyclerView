@@ -10,7 +10,9 @@
         app:layout_constraintTop_toTopOf="parent"
         android:id="@+id/jsr_list"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:background="#D9D9DA"
+        app:item_margin_bottom="2dp"/>
 
 
 </android.support.constraint.ConstraintLayout>

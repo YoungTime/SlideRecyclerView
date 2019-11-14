@@ -37,17 +37,18 @@ public class MainActivity extends AppCompatActivity {
         list.add("第四个");
         list.add("第四个");
         ShareAdapter adapter = new ShareAdapter(this,list);
-        adapter.addSlideItem(new SlideItem("测试", 0, new SlideItemAdapter.OnItemClickListener() {
+        adapter.addSlideItem(new SlideItem("Edit", R.drawable.edit, R.color.colorPrimaryDark,0,0,new SlideItemAdapter.OnItemClickListener() {
             @Override
             public void onClick(View view, int pos) {
                 Toast.makeText(MainActivity.this,"第"+pos+" 点击按钮",Toast.LENGTH_SHORT).show();
             }
-        })).addSlideItem(new SlideItem("测试",  0,R.color.colorPrimaryDark,0,0, new SlideItemAdapter.OnItemClickListener() {
+        })).addSlideItem(new SlideItem("Delete",  R.drawable.delete,R.color.colorPrimaryDark,0,0, new SlideItemAdapter.OnItemClickListener() {
             @Override
             public void onClick(View view, int pos) {
                 Toast.makeText(MainActivity.this,"第"+pos+" 点击按钮",Toast.LENGTH_SHORT).show();
             }
         }));
         recyclerView.setAdapter(adapter);
+
     }
 }

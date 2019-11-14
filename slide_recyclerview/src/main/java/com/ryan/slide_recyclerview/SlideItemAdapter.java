@@ -50,6 +50,7 @@ public class SlideItemAdapter extends RecyclerView.Adapter<SlideItemAdapter.JRSl
                 items.get(position).getListener().onClick(v,pos);
             }
         });
+        holder.itemView.setBackgroundColor(items.get(position).getBgId());
     }
 
     @Override

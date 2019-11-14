@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="SlideRecyclerView">
+        <attr name="item_margin_left" format="dimension"/>
+        <attr name="item_margin_right" format="dimension"/>
+        <attr name="item_margin_top" format="dimension"/>
+        <attr name="item_margin_bottom" format="dimension"/>
+        <attr name="item_padding_left" format="dimension"/>
+        <attr name="item_padding_right" format="dimension"/>
+        <attr name="item_padding_top" format="dimension"/>
+        <attr name="item_padding_bottom" format="dimension"/>
+        <attr name="item_background" format="reference|color"/>
+    </declare-styleable>
+</resources>

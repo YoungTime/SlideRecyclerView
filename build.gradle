@@ -18,9 +18,7 @@ allprojects {
     repositories {
         google()
         jcenter()
-        maven {
-            url "https://raw.githubusercontent.com/YoungTime/SlideRecyclerview/master"
-        }
+            maven { url 'https://jitpack.io' }
     }
 }
 

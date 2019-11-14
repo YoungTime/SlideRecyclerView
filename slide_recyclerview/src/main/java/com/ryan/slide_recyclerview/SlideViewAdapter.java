@@ -1,6 +1,7 @@
 package com.ryan.slide_recyclerview;
 
 import android.content.Context;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -21,6 +22,15 @@ public abstract class SlideViewAdapter extends RecyclerView.Adapter<SlideViewAda
     private SlideItemAdapter itemAdapter;
     private LinearLayoutManager manager;
 
+    private int itemMarLeft;
+    private int itemMarRight;
+    private int itemMarTop;
+    private int itemMarBot;
+    private int itemPadLeft;
+    private int itemPadRight;
+    private int itemPadTop;
+    private int itemPadBot;
+
     protected abstract List<Object> getDataList();
 
     protected abstract void bindContent(LinearLayout linearLayout, Object data);
@@ -33,6 +43,19 @@ public abstract class SlideViewAdapter extends RecyclerView.Adapter<SlideViewAda
         }
         slideItems.add(item);
         return this;
+    }
+
+
+    void setItemAttrs(float itemMarLeft,float itemMarRight,float itemMarTop,float itemMarBot, float itemPadLeft, float itemPadRight
+            , float itemPadTop, float itemPadBot){
+        this.itemMarLeft = (int) itemMarLeft;
+        this.itemMarRight = (int) itemMarRight;
+        this.itemMarTop = (int) itemMarTop;
+        this.itemMarBot = (int) itemMarBot;
+        this.itemPadLeft = (int) itemPadLeft;
+        this.itemPadRight = (int) itemPadRight;
+        this.itemPadTop = (int) itemPadTop;
+        this.itemPadBot = (int) itemPadBot;
     }
 
     @Override
@@ -48,7 +71,7 @@ public abstract class SlideViewAdapter extends RecyclerView.Adapter<SlideViewAda
 
     @Override
     public void onBindViewHolder(final JRSlideViewHolder holder, int position) {
-
+        setItemAttrs(holder.clItem);
         bindContent(holder.llContent, getDataList().get(position));
         manager = new LinearLayoutManager(getContext());
         manager.setOrientation(LinearLayoutManager.HORIZONTAL);
@@ -67,15 +90,23 @@ public abstract class SlideViewAdapter extends RecyclerView.Adapter<SlideViewAda
 
         LinearLayout llContent;
         RecyclerView rvHide;
+        ConstraintLayout clItem;
 
         public JRSlideViewHolder(View itemView) {
             super(itemView);
             llContent = itemView.findViewById(R.id.ll_slide_context);
             rvHide = itemView.findViewById(R.id.rv_slide_hide);
+            clItem = itemView.findViewById(R.id.cl_slide_item);
         }
     }
 
     int getW(){
-        return slideItems.size() * dp2px(60,getContext());
+        return slideItems.size() * dp2px(72,getContext());
+    }
+
+    private void setItemAttrs(View view){
+        RecyclerView.LayoutParams params = (RecyclerView.LayoutParams) view.getLayoutParams();
+        params.setMargins(itemMarLeft,itemMarTop,itemMarRight,itemMarBot);
+        view.setPadding(itemPadLeft,itemPadTop,itemPadRight,itemPadBot);
     }
 }

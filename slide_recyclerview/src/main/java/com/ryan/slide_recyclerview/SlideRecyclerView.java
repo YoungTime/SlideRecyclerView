@@ -1,6 +1,7 @@
 package com.ryan.slide_recyclerview;
 
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -32,8 +33,17 @@ public class SlideRecyclerView extends RecyclerView {
 
     /**触碰末次的横坐标*/
     private int mLastX;
+    private TypedArray typedArray;
 
-
+    // item 的属性
+    private int itemMarLeft;
+    private int itemMarRight;
+    private int itemMarTop;
+    private int itemMarBot;
+    private int itemPadLeft;
+    private int itemPadRight;
+    private int itemPadTop;
+    private int itemPadBot;
 
     public SlideRecyclerView(Context context) {
         super(context);
@@ -42,17 +52,42 @@ public class SlideRecyclerView extends RecyclerView {
 
     public SlideRecyclerView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
+        setItemAttrs(attrs);
         init();
     }
 
     public SlideRecyclerView(Context context, @Nullable AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
+        setItemAttrs(attrs);
         init();
     }
 
     private void init(){
         mTouchSlop = ViewConfiguration.get(getContext()).getScaledTouchSlop();
         mScroller = new Scroller(getContext());
+    }
+
+    private void setItemAttrs(AttributeSet attrs){
+        if (typedArray == null){
+            typedArray = getContext().obtainStyledAttributes(attrs,R.styleable.SlideRecyclerView);
+        }
+        itemMarLeft = (int) typedArray.getDimension(R.styleable.SlideRecyclerView_item_margin_left,0);
+        itemMarRight = (int) typedArray.getDimension(R.styleable.SlideRecyclerView_item_margin_right,0);
+        itemMarTop = (int) typedArray.getDimension(R.styleable.SlideRecyclerView_item_margin_top,0);
+        itemMarBot = (int) typedArray.getDimension(R.styleable.SlideRecyclerView_item_margin_bottom,0);
+        itemPadLeft = (int) typedArray.getDimension(R.styleable.SlideRecyclerView_item_padding_left,0);
+        itemPadRight = (int) typedArray.getDimension(R.styleable.SlideRecyclerView_item_padding_right,0);
+        itemPadTop = (int) typedArray.getDimension(R.styleable.SlideRecyclerView_item_padding_top,0);
+        itemPadBot = (int) typedArray.getDimension(R.styleable.SlideRecyclerView_item_padding_bottom,0);
+        typedArray.recycle();
+    }
+
+    @Override
+    public void setAdapter(@Nullable Adapter adapter) {
+        super.setAdapter(adapter);
+        if (getAdapter() != null){
+            ((SlideViewAdapter)getAdapter()).setItemAttrs(itemMarLeft,itemMarRight,itemMarTop,itemMarBot,itemPadLeft,itemPadRight,itemPadTop,itemPadBot);
+        }
     }
 
     @Override
