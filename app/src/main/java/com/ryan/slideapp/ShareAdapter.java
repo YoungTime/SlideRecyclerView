@@ -3,6 +3,7 @@ package com.ryan.slideapp;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -27,9 +28,8 @@ public class ShareAdapter extends SlideViewAdapter {
     }
 
     @Override
-    protected void bindContent(LinearLayout linearLayout, final Object data) {
-        View view = LayoutInflater.from(linearLayout.getContext()).inflate(R.layout.item_slide_view,linearLayout,false);
-        linearLayout.addView(view);
+    protected View bindContent(ViewGroup parent, final Object data) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_slide_view,parent,false);
         TextView tv = view.findViewById(R.id.tv_slide);
         tv.setText((String) data);
         view .setOnClickListener(new View.OnClickListener() {
@@ -39,6 +39,7 @@ public class ShareAdapter extends SlideViewAdapter {
             }
         });
 
+        return view;
     }
 
     @Override

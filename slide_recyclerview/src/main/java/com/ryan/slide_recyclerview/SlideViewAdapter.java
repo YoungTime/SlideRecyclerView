@@ -35,7 +35,7 @@ public abstract class SlideViewAdapter extends RecyclerView.Adapter<SlideViewAda
 
     protected abstract List<Object> getDataList();
 
-    protected abstract void bindContent(LinearLayout linearLayout, Object data);
+    protected abstract View bindContent(ViewGroup parent, Object data);
 
     protected abstract Context getContext();
 
@@ -75,7 +75,7 @@ public abstract class SlideViewAdapter extends RecyclerView.Adapter<SlideViewAda
     @Override
     public void onBindViewHolder(final JRSlideViewHolder holder, int position) {
         setItemAttrs(holder.clItem);
-        bindContent(holder.llContent, getDataList().get(position));
+        holder.llContent.addView(bindContent(holder.llContent, getDataList().get(position)));
         manager = new LinearLayoutManager(getContext());
         manager.setOrientation(LinearLayoutManager.HORIZONTAL);
         holder.rvHide.setLayoutManager(manager);
