@@ -6,9 +6,9 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
 import android.widget.Toast;
 
-import com.ryan.slideapp.recycler.SlideItemAdapter;
-import com.ryan.slideapp.recycler.SlideItem;
-import com.ryan.slideapp.recycler.SlideRecyclerView;
+import com.ryan.slide_recyclerview.SlideItem;
+import com.ryan.slide_recyclerview.SlideItemAdapter;
+import com.ryan.slide_recyclerview.SlideRecyclerView;
 
 import java.util.ArrayList;
 import java.util.List;

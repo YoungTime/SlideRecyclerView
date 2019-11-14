@@ -1,4 +1,4 @@
-package com.ryan.slideapp.recycler;
+package com.ryan.slide_recyclerview;
 
 import android.content.Context;
 import android.util.TypedValue;

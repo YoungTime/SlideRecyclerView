@@ -1,4 +1,4 @@
-package com.ryan.slideapp.recycler;
+package com.ryan.slide_recyclerview;
 
 import android.content.Context;
 import android.support.v7.widget.LinearLayoutManager;
@@ -7,12 +7,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
-import com.ryan.slideapp.R;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.ryan.slideapp.recycler.ScreenUtil.dp2px;
+import static com.ryan.slide_recyclerview.ScreenUtil.dp2px;
+
 
 public abstract class SlideViewAdapter extends RecyclerView.Adapter<SlideViewAdapter.JRSlideViewHolder> {
 

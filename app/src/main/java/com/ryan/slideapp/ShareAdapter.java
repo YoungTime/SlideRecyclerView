@@ -7,7 +7,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.ryan.slideapp.recycler.SlideViewAdapter;
+import com.ryan.slide_recyclerview.SlideViewAdapter;
 
 import java.util.List;
 

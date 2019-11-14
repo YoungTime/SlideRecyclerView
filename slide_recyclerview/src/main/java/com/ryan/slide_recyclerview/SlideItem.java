@@ -1,4 +1,4 @@
-package com.ryan.slideapp.recycler;
+package com.ryan.slide_recyclerview;
 
 
 public class SlideItem {

@@ -1,4 +1,4 @@
-package com.ryan.slideapp.recycler;
+package com.ryan.slide_recyclerview;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -7,8 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import com.ryan.slideapp.R;
 
 import java.util.List;
 
@@ -73,6 +71,6 @@ public class SlideItemAdapter extends RecyclerView.Adapter<SlideItemAdapter.JRSl
 
 
     public interface OnItemClickListener{
-        void onClick(View view,int pos);
+        void onClick(View view, int pos);
     }
 }
