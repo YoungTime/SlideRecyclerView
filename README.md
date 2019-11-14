@@ -1,2 +1,3 @@
 # SlideRecyclerView
-左滑菜单 RecyclerView
+[中文](../README_zh) | [English](../README)
+
