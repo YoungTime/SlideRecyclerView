@@ -1,6 +1,7 @@
 package com.ryan.slide_recyclerview;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -30,6 +31,7 @@ public abstract class SlideViewAdapter extends RecyclerView.Adapter<SlideViewAda
     private int itemPadRight;
     private int itemPadTop;
     private int itemPadBot;
+    private Drawable drawable;
 
     protected abstract List<Object> getDataList();
 
@@ -46,8 +48,8 @@ public abstract class SlideViewAdapter extends RecyclerView.Adapter<SlideViewAda
     }
 
 
-    void setItemAttrs(float itemMarLeft,float itemMarRight,float itemMarTop,float itemMarBot, float itemPadLeft, float itemPadRight
-            , float itemPadTop, float itemPadBot){
+    void setItemAttrs(float itemMarLeft, float itemMarRight, float itemMarTop, float itemMarBot, float itemPadLeft, float itemPadRight
+            , float itemPadTop, float itemPadBot, Drawable drawable){
         this.itemMarLeft = (int) itemMarLeft;
         this.itemMarRight = (int) itemMarRight;
         this.itemMarTop = (int) itemMarTop;
@@ -56,6 +58,7 @@ public abstract class SlideViewAdapter extends RecyclerView.Adapter<SlideViewAda
         this.itemPadRight = (int) itemPadRight;
         this.itemPadTop = (int) itemPadTop;
         this.itemPadBot = (int) itemPadBot;
+        this.drawable = drawable;
     }
 
     @Override
@@ -108,5 +111,6 @@ public abstract class SlideViewAdapter extends RecyclerView.Adapter<SlideViewAda
         RecyclerView.LayoutParams params = (RecyclerView.LayoutParams) view.getLayoutParams();
         params.setMargins(itemMarLeft,itemMarTop,itemMarRight,itemMarBot);
         view.setPadding(itemPadLeft,itemPadTop,itemPadRight,itemPadBot);
+        view.setBackground(drawable);
     }
 }
