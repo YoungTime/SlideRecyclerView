@@ -1,5 +1,5 @@
 # SlideRecyclerView
-[中文](./README_zh) | [English](./README)
+[中文](https://github.com/YoungTime/SlideRecyclerView/blob/master/README_zh.md) | [English](https://github.com/YoungTime/SlideRecyclerView/blob/master/README.md)
 
 描述：SlideRecyclerview 是一个支持左滑菜单栏的 RecyclerView，是一个比较轻量级的自定义 View。
 
