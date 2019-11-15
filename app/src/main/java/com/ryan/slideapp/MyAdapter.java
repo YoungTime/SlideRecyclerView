@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.ryan.slide_recyclerview.SlideViewAdapter;
@@ -12,7 +13,7 @@ import java.util.List;
 
 public class MyAdapter extends SlideViewAdapter {
 
-    private List<Object> mDatas;
+    private List<UserInfo> mDatas;
     private Context mContext;
 
     /**
@@ -30,10 +31,12 @@ public class MyAdapter extends SlideViewAdapter {
      * @return 返回单个 Item 的布局
      */
     @Override
-    protected View bindContent(ViewGroup parent, Object data) {
+    protected View bindContent(ViewGroup parent, Object data,int pos) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.xxx,parent,false);
         // 操作 Item 中的子 View
         TextView textView = view.findViewById(R.id.xxx);
+        ImageView imageView = view.findViewById(R.id.xxx);
+        // 将
         textView.setText((String) data);
         return view;
     }

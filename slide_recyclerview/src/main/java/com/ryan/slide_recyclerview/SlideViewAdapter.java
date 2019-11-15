@@ -16,7 +16,7 @@ import java.util.List;
 import static com.ryan.slide_recyclerview.ScreenUtil.dp2px;
 
 
-public abstract class SlideViewAdapter extends RecyclerView.Adapter<SlideViewAdapter.JRSlideViewHolder> {
+public abstract class SlideViewAdapter<T> extends RecyclerView.Adapter<SlideViewAdapter.JRSlideViewHolder> {
 
 
     private List<SlideItem> slideItems;
@@ -33,9 +33,9 @@ public abstract class SlideViewAdapter extends RecyclerView.Adapter<SlideViewAda
     private int itemPadBot;
     private Drawable drawable;
 
-    protected abstract List<Object> getDataList();
+    protected abstract List<T> getDataList();
 
-    protected abstract View bindContent(ViewGroup parent, Object data);
+    protected abstract View bindContent(ViewGroup parent, T data, int pos);
 
     protected abstract Context getContext();
 
@@ -73,9 +73,14 @@ public abstract class SlideViewAdapter extends RecyclerView.Adapter<SlideViewAda
     }
 
     @Override
+    public int getItemViewType(int position) {
+        return super.getItemViewType(position);
+    }
+
+    @Override
     public void onBindViewHolder(final JRSlideViewHolder holder, int position) {
         setItemAttrs(holder.clItem);
-        holder.llContent.addView(bindContent(holder.llContent, getDataList().get(position)));
+        holder.llContent.addView(bindContent(holder.llContent, getDataList().get(position),position));
         manager = new LinearLayoutManager(getContext());
         manager.setOrientation(LinearLayoutManager.HORIZONTAL);
         holder.rvHide.setLayoutManager(manager);
