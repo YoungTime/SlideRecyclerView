@@ -16,7 +16,7 @@ import java.util.List;
 import static com.ryan.slide_recyclerview.ScreenUtil.dp2px;
 
 
-public abstract class SlideViewAdapter<T> extends RecyclerView.Adapter<SlideViewAdapter.JRSlideViewHolder> {
+public abstract class SlideViewAdapter<T extends Object> extends RecyclerView.Adapter<SlideViewAdapter.JRSlideViewHolder> {
 
 
     private List<SlideItem> slideItems;
@@ -94,7 +94,7 @@ public abstract class SlideViewAdapter<T> extends RecyclerView.Adapter<SlideView
     }
 
 
-    class JRSlideViewHolder extends RecyclerView.ViewHolder {
+    static class JRSlideViewHolder extends RecyclerView.ViewHolder {
 
         LinearLayout llContent;
         RecyclerView rvHide;
