@@ -50,7 +50,12 @@ public class MyAdapter extends SlideViewAdapter {
 
     private List<Object> mDatas;
     private Context mContext;
-    
+
+    public MyAdapter(List<Object> mDatas, Context mContext) {
+        this.mDatas = mDatas;
+        this.mContext = mContext;
+    }
+
     /**
      * @return 你需要在 Item 中使用的数据列表
      */
@@ -60,16 +65,18 @@ public class MyAdapter extends SlideViewAdapter {
     }
 
     /**
-     * 绑定 Item 布局
+     * 绑定 Item 布局，也可根据 data 类型返回不同的 View
      * @param parent 父布局
      * @param data 单个布局的 Item 的数据
      * @return 返回单个 Item 的布局
      */
     @Override
-    protected View bindContent(ViewGroup parent, Object data) {
+    protected View bindContent(ViewGroup parent, Object data,int pos) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.xxx,parent,false);
         // 操作 Item 中的子 View
         TextView textView = view.findViewById(R.id.xxx);
+        ImageView imageView = view.findViewById(R.id.xxx);
+        // 将 data 转换为你需要的类型
         textView.setText((String) data);
         return view;
     }
