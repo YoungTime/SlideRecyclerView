@@ -160,6 +160,6 @@ public class MyAdapter extends SlideViewAdapter<MsgEntity> {
 
 # 效果
 
-![gif](C:/Users/duzeming/Desktop/gif.gif)
+![gif](/image/gif.gif)
 
 喜欢的话请给我一个 Star，谢谢！
