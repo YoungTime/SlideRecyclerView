@@ -220,7 +220,7 @@ public class SlideRecyclerView extends RecyclerView {
     }
 
     /**
-     * 使用Scroller关闭菜单栏
+     * 关闭菜单栏
      */
     public void closeMenu(){
         mScroller.startScroll(lastItem.getScrollX(),0, -lastItem.getScrollX(), 0 ,500);
@@ -237,8 +237,8 @@ public class SlideRecyclerView extends RecyclerView {
     }
 
     /**
-     * 获取VelocityTracker实例，并为其添加事件
-     * @param e 触碰事件
+     * 添加 VelocityTracker 事件
+     * @param e
      */
     private void addTracker(MotionEvent e){
         if (tracker == null){
@@ -247,9 +247,6 @@ public class SlideRecyclerView extends RecyclerView {
         tracker.addMovement(e);
     }
 
-    /**
-     * 释放VelocityTracker
-     */
     private void removeTracker(){
         if (tracker != null){
             tracker.clear();
@@ -259,9 +256,9 @@ public class SlideRecyclerView extends RecyclerView {
     }
 
     /**
-     * 判断该itemView是否显示在屏幕内
-     * @param view itemView
-     * @return isInWindow
+     * 判断该 itemView 是否显示在屏幕内
+     * @param view item 布局
+     * @return 是否在屏幕内
      */
     private boolean isInWindow(View view){
         if (getLayoutManager() instanceof LinearLayoutManager) {

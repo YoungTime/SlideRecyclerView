@@ -4,19 +4,18 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.ryan.slide_recyclerview.SlideViewAdapter;
 
 import java.util.List;
 
-public class MyAdapter extends SlideViewAdapter {
+public class MyAdapter extends SlideViewAdapter<MsgEntity> {
 
-    private List<Object> mDatas;
+    private List<MsgEntity> mDatas;
     private Context mContext;
 
-    public MyAdapter(List<Object> mDatas, Context mContext) {
+    public MyAdapter(List<MsgEntity> mDatas, Context mContext) {
         this.mDatas = mDatas;
         this.mContext = mContext;
     }
@@ -25,7 +24,7 @@ public class MyAdapter extends SlideViewAdapter {
      * @return 你需要在 Item 中使用的数据列表
      */
     @Override
-    protected List<Object> getDataList() {
+    protected List<MsgEntity> getDataList() {
         return mDatas;
     }
 
@@ -36,13 +35,11 @@ public class MyAdapter extends SlideViewAdapter {
      * @return 返回单个 Item 的布局
      */
     @Override
-    protected View bindContent(ViewGroup parent, Object data,int pos) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.xxx,parent,false);
+    protected View bindContent(ViewGroup parent, MsgEntity data,int pos) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_slide_view,parent,false);
         // 操作 Item 中的子 View
-        TextView textView = view.findViewById(R.id.xxx);
-        ImageView imageView = view.findViewById(R.id.xxx);
-        // 将 data 转换为你需要的类型
-        textView.setText((String) data);
+        TextView textView = view.findViewById(R.id.tv_slide);
+        textView.setText(data.getName());
         return view;
     }
 

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity"
-    android:background="#D9D9DA">
+    android:background="#ffffff">
 
     <com.ryan.slide_recyclerview.SlideRecyclerView
         app:layout_constraintTop_toTopOf="parent"

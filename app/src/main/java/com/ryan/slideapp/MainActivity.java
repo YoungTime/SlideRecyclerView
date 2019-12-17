@@ -26,26 +26,32 @@ public class MainActivity extends AppCompatActivity {
 
         recyclerView = findViewById(R.id.jsr_list);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        List<Object> list = new ArrayList<Object>();
-        list.add("第一个");
-        list.add("第二个");
-        list.add("第三个");
-        list.add("第四个");
-        list.add("第四个");
-        list.add("第四个");
-        list.add("第四个");
-        list.add("第四个");
-        list.add("第四个");
-        ShareAdapter adapter = new ShareAdapter(this,list);
-        adapter.addSlideItem(new SlideItem("Edit", R.drawable.edit, R.color.colorPrimaryDark,0,0,new SlideItemAdapter.OnItemClickListener() {
+        final List<MsgEntity> list = new ArrayList<>();
+
+        MsgEntity entity1 = new MsgEntity();
+        entity1.setName("第一个");
+        MsgEntity entity2 = new MsgEntity();
+        entity2.setName("第二个");
+        MsgEntity entity3 = new MsgEntity();
+        entity3.setName("第三个");
+        MsgEntity entity4 = new MsgEntity();
+        entity4.setName("第四个");
+        list.add(entity1);
+        list.add(entity2);
+        list.add(entity3);
+        list.add(entity4);
+
+
+        MyAdapter adapter = new MyAdapter(list,this);
+        adapter.addSlideItem(new SlideItem("Edit", R.drawable.edit, R.color.colorAccent,0,0,new SlideItemAdapter.OnItemClickListener() {
             @Override
             public void onClick(View view, int pos) {
-                Toast.makeText(MainActivity.this,"第"+pos+" 点击按钮",Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this,"Edit "+list.get(pos).getName(),Toast.LENGTH_SHORT).show();
             }
-        })).addSlideItem(new SlideItem("Delete",  R.drawable.delete,R.color.colorPrimaryDark,0,0, new SlideItemAdapter.OnItemClickListener() {
+        })).addSlideItem(new SlideItem("Delete",  R.drawable.delete,R.color.colorAccent,0,0, new SlideItemAdapter.OnItemClickListener() {
             @Override
             public void onClick(View view, int pos) {
-                Toast.makeText(MainActivity.this,"第"+pos+" 点击按钮",Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this,"Delete "+list.get(pos).getName(),Toast.LENGTH_SHORT).show();
             }
         }));
         recyclerView.setAdapter(adapter);
