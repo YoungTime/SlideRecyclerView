@@ -29,6 +29,6 @@ allprojects {
 ​        add the dependency in build.gradle of the module which you need to use:
 
 ```groovy
-implementation 'com.github.YoungTime:SlideRecyclerview:1.0.0'
+implementation 'com.github.YoungTime:SlideRecyclerview:1.0.1'
 ```
 

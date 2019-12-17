@@ -9,7 +9,7 @@
     <TextView
         android:id="@+id/tv_slide"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
         android:gravity="center"
         android:textSize="20sp"

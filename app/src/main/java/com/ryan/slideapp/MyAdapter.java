@@ -12,7 +12,10 @@ import java.util.List;
 
 public class MyAdapter extends SlideViewAdapter<MsgEntity> {
 
-    private List<MsgEntity> mDatas;
+    /**
+     * MsgEntity 为你的数据源数据类型
+     */
+    private List<MsgEntity> mDatas; // 数据源
     private Context mContext;
 
     public MyAdapter(List<MsgEntity> mDatas, Context mContext) {
@@ -44,7 +47,7 @@ public class MyAdapter extends SlideViewAdapter<MsgEntity> {
     }
 
     /**
-     * @return 需要返回使用 SlideRecyclerview 的上下文
+     * @return 需要返回使用 SlideRecyclerview 的上下文，不能为空
      */
     @Override
     protected Context getContext() {

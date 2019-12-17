@@ -28,6 +28,9 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         final List<MsgEntity> list = new ArrayList<>();
 
+        /**
+         * 这里是模拟的数据源
+         */
         MsgEntity entity1 = new MsgEntity();
         entity1.setName("第一个");
         MsgEntity entity2 = new MsgEntity();
@@ -43,7 +46,11 @@ public class MainActivity extends AppCompatActivity {
 
 
         MyAdapter adapter = new MyAdapter(list,this);
-        adapter.addSlideItem(new SlideItem("Edit", R.drawable.edit, R.color.colorAccent,0,0,new SlideItemAdapter.OnItemClickListener() {
+        /**
+         * 支持的 SlideItem，可以自定义 Item 背景，textColor，textSize，以及点击事件
+         * 背景暂时只支持 ResourceID
+         */
+        adapter.addSlideItem(new SlideItem("Edit", R.drawable.edit,new SlideItemAdapter.OnItemClickListener() {
             @Override
             public void onClick(View view, int pos) {
                 Toast.makeText(MainActivity.this,"Edit "+list.get(pos).getName(),Toast.LENGTH_SHORT).show();
